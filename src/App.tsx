@@ -120,6 +120,25 @@ function App() {
         </Space>
       </Header>
 
+      {/* Logo Banner */}
+      <div style={{
+        background: '#fff',
+        padding: '32px 24px',
+        textAlign: 'center',
+        borderBottom: '1px solid #f0f0f0'
+      }}>
+        <img
+          src="/logo-banner.png"
+          alt="FrameSpeak Logo"
+          style={{
+            maxWidth: '600px',
+            width: '100%',
+            height: 'auto',
+            display: 'inline-block'
+          }}
+        />
+      </div>
+
       <Content style={{ padding: '24px', maxWidth: 1400, margin: '0 auto', width: '100%' }}>
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
           {/* 首次访问欢迎提示 */}
