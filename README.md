@@ -1,18 +1,20 @@
 # FrameSpeak - AI Video Frame Analysis Tool
 
-FrameSpeak is a browser-based video analysis application that extracts frames from videos and uses local LLM services to generate bilingual (Chinese & English) descriptions for each frame.
+English | [简体中文](./README.zh-CN.md)
 
-## Features
+FrameSpeak is a browser-based video analysis application that extracts frames from videos and uses local LLM services to generate bilingual (Chinese & English) descriptions for each frame. Perfect for creating high-quality prompts for AI image generation models like Stable Diffusion, Midjourney, and DALL-E.
 
-- **Video Upload**: Drag and drop or click to upload video files (MP4, AVI, MOV, etc.)
-- **Frame Extraction**: Extract frames at customizable intervals (3, 5, or 10 seconds)
-- **AI Analysis**: Generate detailed image descriptions using local LLM services
-- **Bilingual Output**: Get descriptions in both English and Chinese
-- **Local Storage**: All configurations and extracted frames are stored locally in the browser
-- **Batch Processing**: Analyze all frames at once or individually
-- **Multiple LLM Support**: Works with Ollama, OpenAI, LM Studio, and custom endpoints
+## ✨ Features
 
-## Tech Stack
+- 📹 **Video Upload**: Drag and drop or click to upload video files (MP4, AVI, MOV, etc.)
+- 🎬 **Frame Extraction**: Extract frames at customizable intervals (3, 5, or 10 seconds)
+- 🤖 **AI Analysis**: Generate detailed image descriptions using local LLM services
+- 🌏 **Bilingual Output**: Get descriptions in both English and Chinese
+- 💾 **Local Storage**: All configurations and extracted frames are stored locally in the browser
+- ⚡ **Batch Processing**: Analyze all frames at once or individually
+- 🔌 **Multiple LLM Support**: Works with Ollama, OpenAI, LM Studio, and custom endpoints
+
+## 🛠️ Tech Stack
 
 - **Frontend**: React 19 + TypeScript
 - **Build Tool**: Vite
@@ -20,10 +22,9 @@ FrameSpeak is a browser-based video analysis application that extracts frames fr
 - **State Management**: Zustand
 - **Storage**: IndexedDB (for images) + localStorage (for config)
 - **HTTP Client**: Axios
+- **Internationalization**: i18next
 
-## Getting Started
-
-### Prerequisites
+## 📋 Prerequisites
 
 - Node.js 18+ and npm
 - A local LLM service with vision capabilities:
@@ -32,20 +33,35 @@ FrameSpeak is a browser-based video analysis application that extracts frames fr
   - **OpenAI API** access
   - Any OpenAI-compatible API
 
+## 🚀 Quick Start
+
 ### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/1433744303/FrameSpeak.git
+cd FrameSpeak
+
 # Install dependencies
 npm install
 
 # Start development server
 npm run dev
+```
 
+The application will run at `http://localhost:5173`
+
+### Build and Deploy
+
+```bash
 # Build for production
 npm run build
 
 # Preview production build
 npm run preview
+
+# Deploy to GitHub Pages
+bash deploy.sh
 ```
 
 ### Setting up Ollama (Recommended)
@@ -64,7 +80,13 @@ ollama pull llava
 3. Start the local server in LM Studio
 4. Configure FrameSpeak to use `http://localhost:1234/v1/chat/completions`
 
-## Usage
+### Setting up OpenAI
+
+1. Get your API key from https://platform.openai.com/api-keys
+2. Configure FrameSpeak with your API key
+3. Select `gpt-4-vision-preview` or compatible vision model
+
+## 📖 Usage
 
 1. **Configure LLM**
    - Click "LLM Config" button in the header
@@ -87,7 +109,43 @@ ollama pull llava
    - Or click "Analyze Image" on individual frames
    - Descriptions will be generated in both English and Chinese
 
-## Project Structure
+5. **Copy and Use**
+   - Click the copy button next to each description
+   - Use the prompts in your favorite AI image generation tool
+
+## ⚙️ Configuration
+
+### LLM Settings
+
+- **Provider**: Ollama, OpenAI, LM Studio, or Custom
+- **API Endpoint**: URL of your LLM service
+- **Model Name**: The model to use (e.g., `llava`, `gpt-4-vision-preview`)
+- **API Key**: For OpenAI or other authenticated services
+- **Temperature**: Controls output randomness (0.0 - 1.0)
+- **Max Tokens**: Maximum length of generated descriptions
+- **Custom Prompt**: Optional, customize the analysis prompt template
+
+### Default Endpoints
+
+- **Ollama**: `http://localhost:11434/api/chat`
+- **OpenAI**: `https://api.openai.com/v1/chat/completions`
+- **LM Studio**: `http://localhost:1234/v1/chat/completions`
+
+## 🎨 Generated Description Format
+
+The generated descriptions are optimized for AI image generation models and include:
+
+- **Main Subject Details**: Detailed characteristics of people, objects
+- **Action & Pose**: Precise actions, gestures, expressions
+- **Composition & Framing**: Camera angles, shot types, composition rules
+- **Background & Setting**: Detailed scene descriptions
+- **Lighting**: Light source type, direction, quality
+- **Color Palette**: Dominant colors, color schemes, temperature
+- **Atmosphere**: Overall feeling, mood, weather
+- **Art Style**: Photography or artistic style tags
+- **Technical Details**: Depth of field, textures, material properties
+
+## 📁 Project Structure
 
 ```
 FrameSpeak/
@@ -112,52 +170,41 @@ FrameSpeak/
 └── vite.config.ts
 ```
 
-## Configuration
+## 🏗️ Build and Deploy
 
-### LLM Providers
+```bash
+# Build production version
+npm run build
 
-#### Ollama (Default)
-```javascript
-{
-  provider: 'ollama',
-  endpoint: 'http://localhost:11434/api/chat',
-  model: 'llava:latest',
-  temperature: 0.7,
-  maxTokens: 500
-}
+# Preview production build
+npm run preview
 ```
 
-#### OpenAI
-```javascript
-{
-  provider: 'openai',
-  endpoint: 'https://api.openai.com/v1/chat/completions',
-  model: 'gpt-4-vision-preview',
-  apiKey: 'your-api-key',
-  temperature: 0.7,
-  maxTokens: 500
-}
-```
+Build output will be in the `dist` directory.
 
-#### LM Studio
-```javascript
-{
-  provider: 'lmstudio',
-  endpoint: 'http://localhost:1234/v1/chat/completions',
-  model: 'local-model',
-  temperature: 0.7,
-  maxTokens: 500
-}
-```
+## 🔧 Troubleshooting
 
-## Performance Optimization
+### Cannot Connect to LLM Service
 
-- Frames are extracted at a maximum resolution of 1280x720 to save storage
-- JPEG compression quality is set to 85% to balance quality and size
-- Maximum of 100 frames can be extracted per video
-- IndexedDB is used for storing large image blobs
+- Ensure your LLM service is running
+- Check the endpoint URL is correct
+- Verify firewall settings
+- For Ollama, confirm the model is downloaded: `ollama list`
 
-## Browser Compatibility
+### Poor Description Quality
+
+- Try adjusting the temperature parameter
+- Increase max tokens for more detailed descriptions
+- Use custom prompts to guide output format
+- Ensure you're using a vision-capable model (e.g., llava, gpt-4-vision)
+
+### Browser Storage Full
+
+- Clear old frames and analysis results
+- Click "Clear Video" to free up storage
+- Consider reducing extraction interval to extract fewer frames
+
+## 🌐 Browser Compatibility
 
 - Chrome/Edge 90+
 - Firefox 88+
@@ -169,34 +216,32 @@ Requires support for:
 - HTML5 Video
 - FileReader API
 
-## Known Limitations
+## ⚡ Performance
 
-- Maximum video size: 500MB
-- Maximum frames per video: 100
-- Frames are stored in browser storage (subject to browser quota limits)
-- CORS issues may occur with some LLM services (requires proper CORS configuration)
+- Frames are extracted at maximum 1280x720 resolution to save storage
+- JPEG compression quality set to 85% for quality/size balance
+- Maximum 100 frames per video
+- IndexedDB used for efficient large blob storage
 
-## Troubleshooting
+## 🤝 Contributing
 
-### LLM Connection Issues
-- Ensure your LLM service is running
-- Check CORS configuration (Ollama: `OLLAMA_ORIGINS=* ollama serve`)
-- Verify the endpoint URL is correct
+Contributions are welcome! Please feel free to submit issues and pull requests.
 
-### Frame Extraction Slow
-- Reduce extraction interval
-- Use shorter videos
-- Close other resource-intensive applications
+## 📄 License
 
-### Storage Full
-- Clear old videos using the "Clear Video" button
-- Use browser DevTools to check IndexedDB usage
+MIT License - see [LICENSE](LICENSE) file for details.
 
-## License
+## 🔗 Related Links
 
-MIT
+- [Ollama](https://ollama.ai) - Local LLM runtime
+- [LM Studio](https://lmstudio.ai) - Desktop LLM application
+- [Ant Design](https://ant.design) - UI component library
+- [Vite](https://vitejs.dev) - Frontend build tool
 
-## Contributing
+## 📮 Feedback & Support
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-# FrameSpeak
+For questions or suggestions, please [open an issue](https://github.com/1433744303/FrameSpeak/issues).
+
+---
+
+Built with ❤️ and React

@@ -30,3 +30,17 @@ env
 __pycache__
 *.py[cod]
 *$py.class
+
+# AI-generated guide files (not needed in repository)
+FAVICON-GUIDE.md
+REGENERATE-FEATURE.md
+SEO-GUIDE.md
+TEST-CONNECTION.md
+TOOLTIPS-FEATURE.md
+public/ICON-GUIDE.md
+public/OG-IMAGE-GUIDE.md
+
+# Deployment scripts and backups
+deploy.sh
+*.backup
+*.bak

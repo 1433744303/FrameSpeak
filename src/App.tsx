@@ -215,10 +215,10 @@ function App() {
         }}>
           <Space split={<Divider type="vertical" />}>
             <Text type="secondary">
-              © 2024 FrameSpeak
+              © 2025 FrameSpeak
             </Text>
             <Link
-              href="https://github.com/yourusername/FrameSpeak"
+              href="https://github.com/1433744303/FrameSpeak"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: 'inherit' }}
