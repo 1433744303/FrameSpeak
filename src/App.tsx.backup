@@ -1,0 +1,83 @@
+import { useState, useEffect } from 'react';
+import { Layout, Typography, Button, Space, Divider } from 'antd';
+import { SettingOutlined, DeleteOutlined } from '@ant-design/icons';
+import { VideoUploader } from './components/VideoUploader';
+import { FrameExtractor } from './components/FrameExtractor';
+import { FrameGallery } from './components/FrameGallery';
+import { LLMConfigModal } from './components/LLMConfigModal';
+import { useVideoStore } from './stores/videoStore';
+import { useConfigStore } from './stores/configStore';
+
+const { Header, Content } = Layout;
+const { Title, Text } = Typography;
+
+function App() {
+  const [configModalOpen, setConfigModalOpen] = useState(false);
+  const { currentVideo, clearVideo } = useVideoStore();
+  const { loadLLMConfig } = useConfigStore();
+
+  useEffect(() => {
+    loadLLMConfig();
+  }, [loadLLMConfig]);
+
+  return (
+    <Layout style={{ minHeight: '100vh' }}>
+      <Header style={{
+        background: '#fff',
+        padding: '0 24px',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
+        <Title level={3} style={{ margin: 0 }}>
+          FrameSpeak - Video Frame Analysis
+        </Title>
+        <Button
+          icon={<SettingOutlined />}
+          onClick={() => setConfigModalOpen(true)}
+        >
+          LLM Config
+        </Button>
+      </Header>
+
+      <Content style={{ padding: '24px', maxWidth: 1400, margin: '0 auto', width: '100%' }}>
+        <Space direction="vertical" size="large" style={{ width: '100%' }}>
+          {!currentVideo ? (
+            <div>
+              <Title level={4}>Upload Video</Title>
+              <Text type="secondary">
+                Upload a video file to start extracting frames and analyzing them with AI
+              </Text>
+              <Divider />
+              <VideoUploader />
+            </div>
+          ) : (
+            <>
+              <Space style={{ width: '100%', justifyContent: 'space-between' }}>
+                <Title level={4}>Video Loaded</Title>
+                <Button
+                  danger
+                  icon={<DeleteOutlined />}
+                  onClick={clearVideo}
+                >
+                  Clear Video
+                </Button>
+              </Space>
+              <FrameExtractor />
+              <Divider />
+              <FrameGallery />
+            </>
+          )}
+        </Space>
+      </Content>
+
+      <LLMConfigModal
+        open={configModalOpen}
+        onClose={() => setConfigModalOpen(false)}
+      />
+    </Layout>
+  );
+}
+
+export default App;
