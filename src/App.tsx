@@ -89,29 +89,22 @@ function App() {
   return (
     <>
       <SEOHead />
-      <Layout style={{ minHeight: '100vh', background: '#f5f7fa' }}>
+      <Layout style={{ minHeight: '100vh' }}>
         <Header style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: '#fff',
         padding: '0 24px',
-        boxShadow: '0 4px 12px rgba(102, 126, 234, 0.4)',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        <Title level={3} style={{ margin: 0, color: '#fff' }}>
+        <Title level={3} style={{ margin: 0 }}>
           {t('app.title')}
         </Title>
         <Space>
           <Tooltip title={t('tooltips.languageSwitch')}>
             <Dropdown menu={{ items: languageMenuItems }}>
-              <Button
-                icon={<GlobalOutlined />}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.2)',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
-                  color: '#fff'
-                }}
-              >
+              <Button icon={<GlobalOutlined />}>
                 {i18n.language === 'zh-CN' ? '简体中文' : 'English'}
               </Button>
             </Dropdown>
@@ -120,11 +113,6 @@ function App() {
             <Button
               icon={<SettingOutlined />}
               onClick={() => setConfigModalOpen(true)}
-              style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                color: '#fff'
-              }}
             >
               {t('app.llmConfig')}
             </Button>
@@ -132,27 +120,21 @@ function App() {
         </Space>
       </Header>
 
-      {/* Logo Banner */}
-      <div style={{
-        background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
-        padding: '16px 24px',
-        textAlign: 'center',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
-      }}>
-        <img
-          src="/logo-banner.png"
-          alt="FrameSpeak Logo"
-          style={{
-            maxWidth: '180px',
-            width: '100%',
-            height: 'auto',
-            display: 'inline-block'
-          }}
-        />
-      </div>
-
       <Content style={{ padding: '24px', maxWidth: 1400, margin: '0 auto', width: '100%' }}>
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
+          {/* Logo */}
+          <div style={{ textAlign: 'center', padding: '20px 0' }}>
+            <img
+              src="/logo-banner.png"
+              alt="FrameSpeak Logo"
+              style={{
+                maxWidth: '200px',
+                width: '100%',
+                height: 'auto'
+              }}
+            />
+          </div>
+
           {/* 首次访问欢迎提示 */}
           {showWelcomeTip && (
             <Alert
@@ -240,19 +222,19 @@ function App() {
 
         <Footer style={{
           textAlign: 'center',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          borderTop: 'none',
+          background: '#f5f5f5',
+          borderTop: '1px solid #e8e8e8',
           padding: '16px 24px'
         }}>
-          <Space split={<Divider type="vertical" style={{ borderColor: 'rgba(255,255,255,0.3)' }} />}>
-            <Text style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
+          <Space split={<Divider type="vertical" />}>
+            <Text type="secondary">
               © 2025 FrameSpeak
             </Text>
             <Link
               href="https://github.com/1433744303/FrameSpeak"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: 'rgba(255, 255, 255, 0.85)' }}
+              style={{ color: 'inherit' }}
             >
               <Space size={4}>
                 <GithubOutlined />
