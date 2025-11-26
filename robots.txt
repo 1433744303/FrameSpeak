@@ -1,0 +1,15 @@
+# robots.txt for FrameSpeak
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://yourwebsite.com/sitemap.xml
+
+# Crawl-delay for polite crawlers (optional)
+Crawl-delay: 1
+
+# Block access to certain directories (if needed in future)
+# Disallow: /admin/
+# Disallow: /api/
