@@ -123,7 +123,7 @@ function App() {
       {/* Logo Banner */}
       <div style={{
         background: '#fff',
-        padding: '20px 24px',
+        padding: '16px 24px',
         textAlign: 'center',
         borderBottom: '1px solid #f0f0f0'
       }}>
@@ -131,7 +131,7 @@ function App() {
           src="/logo-banner.png"
           alt="FrameSpeak Logo"
           style={{
-            maxWidth: '300px',
+            maxWidth: '180px',
             width: '100%',
             height: 'auto',
             display: 'inline-block'
