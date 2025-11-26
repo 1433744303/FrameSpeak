@@ -1,247 +1,159 @@
-# FrameSpeak - AI Video Frame Analysis Tool
+# FrameSpeak - AI 视频帧分析工具
 
-English | [简体中文](./README.zh-CN.md)
+FrameSpeak 是一款基于浏览器的视频分析应用，可以从视频中提取帧并使用本地 LLM 服务生成中英文双语描述。特别适用于为 AI 图片生成模型（如 Stable Diffusion、Midjourney、DALL-E）创建高质量提示词。
 
-FrameSpeak is a browser-based video analysis application that extracts frames from videos and uses local LLM services to generate bilingual (Chinese & English) descriptions for each frame. Perfect for creating high-quality prompts for AI image generation models like Stable Diffusion, Midjourney, and DALL-E.
+![img_3.png](img/img_3.png)
+## ✨ 主要功能
 
-## ✨ Features
+- 📹 **视频上传**：支持拖拽或点击上传视频文件（MP4、AVI、MOV 等）
+- 🎬 **帧提取**：可自定义提取间隔（3、5 或 10 秒）
+- 🤖 **AI 分析**：使用本地 LLM 服务生成详细的图片描述
+- 🌏 **双语输出**：同时生成英文和中文描述
+- 💾 **本地存储**：所有配置和提取的帧都存储在浏览器本地
+- ⚡ **批量处理**：支持一次性分析所有帧或逐个分析
+- 🔌 **多 LLM 支持**：兼容 Ollama、OpenAI、LM Studio 和自定义端点
 
-- 📹 **Video Upload**: Drag and drop or click to upload video files (MP4, AVI, MOV, etc.)
-- 🎬 **Frame Extraction**: Extract frames at customizable intervals (3, 5, or 10 seconds)
-- 🤖 **AI Analysis**: Generate detailed image descriptions using local LLM services
-- 🌏 **Bilingual Output**: Get descriptions in both English and Chinese
-- 💾 **Local Storage**: All configurations and extracted frames are stored locally in the browser
-- ⚡ **Batch Processing**: Analyze all frames at once or individually
-- 🔌 **Multiple LLM Support**: Works with Ollama, OpenAI, LM Studio, and custom endpoints
+## ✨ 功能展示
+上传视频
+![img.png](img/img.png)
 
-## 🛠️ Tech Stack
+配置llm
+![img_1.png](img/img_1.png)
 
-- **Frontend**: React 19 + TypeScript
-- **Build Tool**: Vite
-- **UI Library**: Ant Design
-- **State Management**: Zustand
-- **Storage**: IndexedDB (for images) + localStorage (for config)
-- **HTTP Client**: Axios
-- **Internationalization**: i18next
+分析
+![img_2.png](img/img_2.png)
 
-## 📋 Prerequisites
+## 🛠️ 技术栈
 
-- Node.js 18+ and npm
-- A local LLM service with vision capabilities:
-  - **Ollama** with llava model (recommended)
-  - **LM Studio** with a vision model
-  - **OpenAI API** access
-  - Any OpenAI-compatible API
+- **前端**: React 19 + TypeScript
+- **构建工具**: Vite
+- **UI 库**: Ant Design
+- **状态管理**: Zustand
+- **存储**: IndexedDB（图片）+ localStorage（配置）
+- **HTTP 客户端**: Axios
+- **国际化**: i18next
 
-## 🚀 Quick Start
+## 📋 前置要求
 
-### Installation
+- Node.js 18+ 和 npm
+- 支持视觉能力的本地 LLM 服务：
+  - **Ollama** 配合 llava 模型（推荐）
+  - **LM Studio** 配合视觉模型
+  - **OpenAI** API 或兼容接口
+
+## 🚀 快速开始
+
+### 安装
 
 ```bash
-# Clone the repository
+# 克隆仓库
 git clone https://github.com/1433744303/FrameSpeak.git
 cd FrameSpeak
 
-# Install dependencies
+# 安装依赖
 npm install
 
-# Start development server
+# 启动开发服务器
 npm run dev
 ```
 
-The application will run at `http://localhost:5173`
+应用将运行在 `http://localhost:5173`
 
-### Build and Deploy
+### 配置 LLM 服务
 
-```bash
-# Build for production
-npm run build
 
-# Preview production build
-npm run preview
+#### 使用 OpenAI API
 
-# Deploy to GitHub Pages
-bash deploy.sh
-```
+准备你的 OpenAI API 密钥（支持 GPT-4 Vision）
 
-### Setting up Ollama (Recommended)
+### 应用内配置
 
-1. Install Ollama from https://ollama.ai
-2. Pull the llava model:
-```bash
-ollama pull llava
-```
-3. The default configuration in FrameSpeak will work automatically
+1. 点击页面右上角的 "LLM 配置" 按钮
+2. 选择你的服务商（Ollama / OpenAI / LM Studio / 自定义）
+3. 配置端点和模型名称
+4. 点击"测试连接"以验证配置
+5. 保存配置
 
-### Setting up LM Studio
+## 📖 使用说明
 
-1. Install LM Studio from https://lmstudio.ai
-2. Download a vision-capable model (e.g., llava)
-3. Start the local server in LM Studio
-4. Configure FrameSpeak to use `http://localhost:1234/v1/chat/completions`
+1. **上传视频**: 拖拽视频文件到上传区域或点击选择
+2. **提取帧**: 选择提取间隔（3/5/10 秒）并点击"提取帧"
+3. **生成描述**:
+   - 点击"批量分析所有帧"一次性处理所有帧
+   - 或在每个帧卡片上点击"生成描述"单独处理
+4. **复制结果**: 点击每个描述旁的复制按钮使用生成的提示词
 
-### Setting up OpenAI
+## ⚙️ 配置选项
 
-1. Get your API key from https://platform.openai.com/api-keys
-2. Configure FrameSpeak with your API key
-3. Select `gpt-4-vision-preview` or compatible vision model
+### LLM 设置
 
-## 📖 Usage
+- **服务商**: Ollama、OpenAI、LM Studio 或自定义
+- **API 端点**: LLM 服务的 URL
+- **模型名称**: 要使用的模型（如 `llava`、`gpt-4-vision-preview`）
+- **API 密钥**: OpenAI 或其他需要认证的服务
+- **温度**: 控制输出的随机性（0.0 - 1.0）
+- **最大 Token 数**: 生成描述的最大长度
+- **自定义提示词**: 可选，自定义分析提示词模板
 
-1. **Configure LLM**
-   - Click "LLM Config" button in the header
-   - Select your provider (Ollama/OpenAI/LM Studio/Custom)
-   - Enter endpoint URL and model name
-   - Test connection and save
-
-2. **Upload Video**
-   - Drag and drop a video file or click to browse
-   - Supported formats: MP4, AVI, MOV, etc.
-   - Maximum size: 500MB
-
-3. **Extract Frames**
-   - Select frame extraction interval (3, 5, or 10 seconds)
-   - Click "Start Extraction"
-   - Wait for extraction to complete
-
-4. **Analyze Frames**
-   - Click "Batch Analyze All" to analyze all frames at once
-   - Or click "Analyze Image" on individual frames
-   - Descriptions will be generated in both English and Chinese
-
-5. **Copy and Use**
-   - Click the copy button next to each description
-   - Use the prompts in your favorite AI image generation tool
-
-## ⚙️ Configuration
-
-### LLM Settings
-
-- **Provider**: Ollama, OpenAI, LM Studio, or Custom
-- **API Endpoint**: URL of your LLM service
-- **Model Name**: The model to use (e.g., `llava`, `gpt-4-vision-preview`)
-- **API Key**: For OpenAI or other authenticated services
-- **Temperature**: Controls output randomness (0.0 - 1.0)
-- **Max Tokens**: Maximum length of generated descriptions
-- **Custom Prompt**: Optional, customize the analysis prompt template
-
-### Default Endpoints
+### 默认端点
 
 - **Ollama**: `http://localhost:11434/api/chat`
 - **OpenAI**: `https://api.openai.com/v1/chat/completions`
 - **LM Studio**: `http://localhost:1234/v1/chat/completions`
 
-## 🎨 Generated Description Format
-
-The generated descriptions are optimized for AI image generation models and include:
-
-- **Main Subject Details**: Detailed characteristics of people, objects
-- **Action & Pose**: Precise actions, gestures, expressions
-- **Composition & Framing**: Camera angles, shot types, composition rules
-- **Background & Setting**: Detailed scene descriptions
-- **Lighting**: Light source type, direction, quality
-- **Color Palette**: Dominant colors, color schemes, temperature
-- **Atmosphere**: Overall feeling, mood, weather
-- **Art Style**: Photography or artistic style tags
-- **Technical Details**: Depth of field, textures, material properties
-
-## 📁 Project Structure
-
-```
-FrameSpeak/
-├── src/
-│   ├── components/          # React components
-│   │   ├── VideoUploader.tsx
-│   │   ├── FrameExtractor.tsx
-│   │   ├── FrameGallery.tsx
-│   │   ├── FrameCard.tsx
-│   │   └── LLMConfigModal.tsx
-│   ├── services/            # Business logic
-│   │   ├── videoService.ts  # Video processing
-│   │   ├── llmService.ts    # LLM API calls
-│   │   └── storageService.ts # IndexedDB/localStorage
-│   ├── stores/              # Zustand state management
-│   │   ├── videoStore.ts
-│   │   └── configStore.ts
-│   ├── types/               # TypeScript types
-│   │   └── index.ts
-│   └── App.tsx              # Main component
-├── package.json
-└── vite.config.ts
-```
-
-## 🏗️ Build and Deploy
+## 🏗️ 构建和部署
 
 ```bash
-# Build production version
+# 构建生产版本
 npm run build
 
-# Preview production build
+# 预览生产构建
 npm run preview
+
 ```
 
-Build output will be in the `dist` directory.
+构建产物将输出到 `dist` 目录。
 
-## 🔧 Troubleshooting
+## 🎨 生成的描述格式
 
-### Cannot Connect to LLM Service
+生成的描述针对 AI 图片生成模型进行了优化，包含：
 
-- Ensure your LLM service is running
-- Check the endpoint URL is correct
-- Verify firewall settings
-- For Ollama, confirm the model is downloaded: `ollama list`
+- **主体细节**: 人物、物体的详细特征
+- **动作与姿态**: 精确的动作、手势、表情
+- **构图与取景**: 相机角度、镜头类型、构图规则
+- **背景与环境**: 详细的场景描述
+- **光照**: 光源类型、方向、质量
+- **色彩**: 主色调、配色方案、色温
+- **氛围**: 整体感觉、情绪、天气
+- **艺术风格**: 摄影或艺术风格标签
+- **技术细节**: 景深、纹理、材质属性
 
-### Poor Description Quality
+## 🔧 故障排除
 
-- Try adjusting the temperature parameter
-- Increase max tokens for more detailed descriptions
-- Use custom prompts to guide output format
-- Ensure you're using a vision-capable model (e.g., llava, gpt-4-vision)
+### 无法连接到 LLM 服务
 
-### Browser Storage Full
+- 确保 LLM 服务正在运行
+- 检查端点 URL 是否正确
+- 验证防火墙设置
+- 对于 Ollama，确认模型已下载：`ollama list`
 
-- Clear old frames and analysis results
-- Click "Clear Video" to free up storage
-- Consider reducing extraction interval to extract fewer frames
+### 描述质量不佳
 
-## 🌐 Browser Compatibility
+- 尝试调整温度参数
+- 增加最大 Token 数以获得更详细的描述
+- 使用自定义提示词来引导输出格式
+- 确保使用支持视觉的模型（如 llava、gpt-4-vision）
 
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
 
-Requires support for:
-- IndexedDB
-- Canvas API
-- HTML5 Video
-- FileReader API
+## 📄 许可证
 
-## ⚡ Performance
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
 
-- Frames are extracted at maximum 1280x720 resolution to save storage
-- JPEG compression quality set to 85% for quality/size balance
-- Maximum 100 frames per video
-- IndexedDB used for efficient large blob storage
 
-## 🤝 Contributing
+## 📮 反馈与支持
 
-Contributions are welcome! Please feel free to submit issues and pull requests.
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## 🔗 Related Links
-
-- [Ollama](https://ollama.ai) - Local LLM runtime
-- [LM Studio](https://lmstudio.ai) - Desktop LLM application
-- [Ant Design](https://ant.design) - UI component library
-- [Vite](https://vitejs.dev) - Frontend build tool
-
-## 📮 Feedback & Support
-
-For questions or suggestions, please [open an issue](https://github.com/1433744303/FrameSpeak/issues).
+如有问题或建议，请[提交 Issue](https://github.com/1433744303/FrameSpeak/issues)。
 
 ---
 
-Built with ❤️ and React
+使用 ❤️ 和 React 构建
