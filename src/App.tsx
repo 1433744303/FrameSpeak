@@ -122,19 +122,6 @@ function App() {
 
       <Content style={{ padding: '24px', maxWidth: 1400, margin: '0 auto', width: '100%' }}>
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
-          {/* Logo */}
-          <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <img
-              src="/logo-banner.png"
-              alt="FrameSpeak Logo"
-              style={{
-                maxWidth: '200px',
-                width: '100%',
-                height: 'auto'
-              }}
-            />
-          </div>
-
           {/* 首次访问欢迎提示 */}
           {showWelcomeTip && (
             <Alert
