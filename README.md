@@ -2,6 +2,10 @@
 
 FrameSpeak 是一款基于浏览器的视频分析应用，可以从视频中提取帧并使用本地 LLM 服务生成中英文双语描述。特别适用于为 AI 图片生成模型（如 Stable Diffusion、Midjourney、DALL-E）创建高质量提示词。
 
+## 🌐 在线演示
+
+访问在线版本：**[https://framespeak.333ai.de/](https://framespeak.333ai.de/)**
+
 ![img_3.png](img/img_3.png)
 ## ✨ 主要功能
 
